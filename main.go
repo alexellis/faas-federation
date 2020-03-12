@@ -64,11 +64,12 @@ func main() {
 		DeleteHandler:  handlers.MakeDeleteHandler(proxyFunc),
 		DeployHandler:  handlers.MakeDeployHandler(proxyFunc, providerLookup),
 		FunctionReader: handlers.MakeFunctionReader(cfg.Providers),
-		ReplicaReader:  handlers.MakeReplicaReader(),
+		ReplicaReader:  handlers.MakeReplicaReader(providerLookup),
 		ReplicaUpdater: handlers.MakeReplicaUpdater(),
 		UpdateHandler:  handlers.MakeUpdateHandler(proxyFunc, providerLookup),
 		HealthHandler:  handlers.MakeHealthHandler(),
 		InfoHandler:    handlers.MakeInfoHandler(version.BuildVersion(), version.GitCommitSHA),
+		LogHandler:     handlers.MakeLogHandler(proxyFunc, providerLookup),
 	}
 
 	bootstrapConfig := bootTypes.FaaSConfig{
